@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h2>Promise的三种状态</h2>
+<script>
+  // 异步操作未完成（pending）
+  // 异步操作成功（fulfilled）
+  // 异步操作失败（rejected）
+  let p = new Promise((resolve, reject) => {
+    if (Math.random() > 0.5) {
+      resolve({
+        data: 'resolve'
+      })
+    } else {
+      reject('错误')
+    }
+  })
+  console.log('p:',p);
+  p.then(res => {
+    console.log( 'p.then===res:', res);
+    console.log( 'p.then===p:', p);
+  }).catch(err => {
+    console.log('catch===err:', err);
+    console.log('catch===p:', p);
+  })
+</script>
+
+</body>
+</html>

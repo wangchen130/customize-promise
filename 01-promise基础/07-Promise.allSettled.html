@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>07-Promise.allSettled</title>
+</head>
+<body>
+<script type="text/javascript">
+  // Promise.allSettled()方法,用来确定一组异步操作是否都结束了（不管成功或者失败），包含了fulfilled和rejected两种情况
+  let p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Math.random() > 0.5) {
+        resolve('p1---resolve')
+      } else {
+        reject('p1---reject')
+      }
+    }, 1 * 1000)
+  })
+  let p2= new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Math.random() > 0.5) {
+        resolve('p2---resolve')
+      } else {
+        reject('p2---reject')
+      }
+    }, 2 * 1000)
+  })
+  let p3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Math.random() > 0.5) {
+        resolve('p3---resolve')
+      } else {
+        reject('p3---reject')
+      }
+    }, 3 * 1000)
+  })
+
+  Promise.allSettled([p1,p2,p3]).then(res => {
+    console.log('Promise.allSettled====res:', res);
+  }).catch(err => {
+    console.log('Promise.allSettled===catch===err:', err);
+  })
+
+</script>
+</body>
+</html>

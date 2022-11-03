@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>08-Promise.any</title>
+</head>
+<body>
+<script type="text/javascript">
+  // Promise.any()方法,只要参数实例又一个变成fulfilled状态，包装实例就会变成fulfilled状态；如果所有参数实例都变成reject状态，包装实例就会变成rejected状态。
+  let p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Math.random() > 0.5) {
+        resolve('p1---resolve')
+      } else {
+        reject('p1---reject')
+      }
+    }, 1 * 1000)
+  })
+  let p2= new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Math.random() > 0.5) {
+        resolve('p2---resolve')
+      } else {
+        reject('p2---reject')
+      }
+    }, 2 * 1000)
+  })
+  let p3 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Math.random() > 0.5) {
+        resolve('p3---resolve')
+      } else {
+        reject('p3---reject')
+      }
+    }, 3 * 1000)
+  })
+
+  Promise.any([p1,p2,p3]).then(res => {
+    console.log('Promise.any===then===res:', res);
+  }).catch(err => {
+    console.log('Promise.any===catch===err:', err);
+  })
+
+</script>
+</body>
+</html>

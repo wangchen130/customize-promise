@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h2>promise基础使用</h2>
+<script>
+  // Promise 为一个构造函数，接收一个 executor 执行器函数作为参数
+  let p = new Promise((resolve, reject) => {
+    if (Math.random() > 0.5) {
+      resolve('resolve')
+    } else {
+      reject('reject')
+    }
+  })
+
+  let p1 = new Promise((resolve, reject) => {
+    if (Math.random() > 0.5) {
+      resolve('p1===resolve')
+    } else {
+      reject('p1===reject')
+    }
+  })
+
+  // 方式1
+  p1.then(
+    // 成功的回调
+    (res) => {
+      console.log("p1成功的回调==res:", res);
+    }
+  ).catch(err => {
+    console.log('p1失败的回调==res：', err);
+  })
+
+  // 方式2：
+
+</script>
+</body>
+</html>

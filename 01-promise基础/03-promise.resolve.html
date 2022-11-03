@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>03-promise.resolve</title>
+</head>
+<body>
+<script type="text/javascript">
+  // Promise.resolve(参数) 将参数转换为 promise 对象
+  // Promise.resolve('test') 等价于 new Promise(resolve => resolve('test'))
+
+  // 1. 参数为非promise对象时， 将参数转换为一个 fulfilled 状态的 promise 对象，then中获取的值为参数。
+  let p1 = Promise.resolve({
+    data: 'success'
+  })
+  console.log('p1:',p1);
+
+  // 2. 参数也可以为一个 promise 对象时，得到的promise对象的状态由参数的promise对象的状态决定，
+  let p2 = new Promise((resolve, reject) => {
+    if (Math.random() > 0.5) {
+      resolve('p2---resolve')
+    } else {
+      reject('p1--reject')
+    }
+  })
+  const p3 = Promise.resolve(p2)
+  console.log('p2:',p3);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>09-finally</title>
+</head>
+<body>
+<script type="text/javascript">
+  let p = new Promise((resolve, reject) => {
+    if (Math.random() > 0.5) {
+      resolve('p----resolve')
+    } else {
+      reject('p----reject')
+    }
+  })
+  p.then(res => {
+    console.log('then---res:',res);
+  }).catch(err => {
+    console.log('catch---err:', err);
+  }).finally(() => {
+    console.log('finally');
+  })
+
+</script>
+</body>
+</html>
