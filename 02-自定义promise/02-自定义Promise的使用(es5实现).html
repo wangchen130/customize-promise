@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>02-自定义Promise的使用(es5实现)</title>
+</head>
+<body>
+<script type="text/javascript" src="CustomPromiseByFunction.js"></script>
+<script type="text/javascript">
+  let cp = new CustomPromiseByFunction((resolve, reject) => {
+    // resolve('resolve')
+    // reject('reject')
+    // throw '错误'
+
+    /**
+     * 异步
+     */
+    setTimeout(() => {
+      // resolve('异步===resolve')
+      reject('异步===reject')
+      // throw '异步===错误'
+    },1000)
+  })
+
+  console.log('cp:', cp);
+
+  const result = cp.then(res => {
+    // console.log('then==res:', res);
+    // return 'then方法【成功】回调的返回值'
+    return new CustomPromiseByFunction((resolve, reject) => {
+      // resolve('then方法【成功】回调里返回的promise对象，状态为 fulfilled')
+      reject('then方法【成功】回调里返回的promise对象，状态为 reject')
+    })
+    // throw 'then方法【成功】回调里抛出错误'
+  },
+    err => {
+    // console.warn('then==err:', err);
+    // return `then方法【失败】回调的返回值:${err}`
+    return new CustomPromiseByFunction((resolve, reject) => {
+      // resolve('then方法【失败】回调里返回的promise对象，状态为 fulfilled')
+      reject('then方法【失败】回调里返回的promise对象，状态为 reject')
+    })
+    // throw 'then方法【失败】回调里抛出错误'
+  }).then(res => {
+    console.log('第一个 .then===res:', res);
+  }).then(res => {
+    console.log('第二个 .then===res:', res);
+  }).then(res => {
+    console.log('第三个 .then===res:', res);
+  }).then(res => {
+    console.log('第四个 .then===res:', res);
+  }).then(res => {
+    console.log('第五个 .then===res:', res);
+  }).catch(err => {
+    console.warn('.catch===err:', err);
+  })
+
+  console.log('result:', result);
+
+ /* cp.then(res => {
+    console.log('第一个 .then===res:', res);
+  }).then(res => {
+    console.log('第二个 .then===res:', res);
+  }).then(res => {
+    console.log('第三个 .then===res:', res);
+  }).then(res => {
+    console.log('第四个 .then===res:', res);
+  }).then(res => {
+    console.log('第五个 .then===res:', res);
+  }).catch(err => {
+    console.log('.catch===err:', err);
+  })*/
+
+
+</script>
+</body>
+</html>
